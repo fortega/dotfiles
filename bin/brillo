@@ -1,0 +1,31 @@
+#!/usr/bin/zsh
+set_v(){
+    echo Guardando:
+    echo $1 | sudo tee /sys/class/backlight/intel_backlight/brightness
+}
+
+show(){
+    echo Actual:
+    < /sys/class/backlight/intel_backlight/actual_brightness
+}
+
+if [ $# -gt 0 ]
+then
+    if [ $1 -gt 0 ]
+    then
+	set_v $1
+    else
+	show
+    fi
+else
+    min=4500
+    b=$( < /sys/class/backlight/intel_backlight/actual_brightness)
+    if [ $b -lt $min ]
+    then
+	set_v $min
+    else
+	show
+    fi
+fi
+
+
