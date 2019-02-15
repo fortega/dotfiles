@@ -1,6 +1,7 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export TERMINAL=/usr/bin/gnome-terminal
+export EDITOR=/usr/bin/emacs
 
+# ZSH
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 plugins=(
@@ -8,5 +9,12 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]
+then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    echo "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh not found"
+fi
+
+alias ssh=ssh -4
