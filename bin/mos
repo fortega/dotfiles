@@ -1,0 +1,10 @@
+#!/bin/bash
+
+V=$HOME/.mos/bin/mos
+
+if [ -f $V ]
+then
+    $V
+else
+    echo "$V not found"
+fi
