@@ -1,6 +1,3 @@
-export TERMINAL=/usr/bin/gnome-terminal
-export EDITOR=/usr/bin/emacs
-
 # ZSH
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
