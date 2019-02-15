@@ -1,0 +1,34 @@
+#!/usr/bin/zsh
+DIR=~/openvpn
+
+
+RUN_OPENVPN(){
+    if [[ $(diff $DIR/resolv.csm.conf /etc/resolv.conf) ]]; then
+	echo backup dns
+	cp /etc/resolv.conf $DIR/
+	
+	echo copiamos dns
+	sudo cp $DIR/resolv.csm.conf /etc/resolv.conf
+
+	echo iniciamos openvpn
+	cd $DIR
+	sudo openvpn $DIR/client.conf
+    else
+	echo restaurando dns
+	sudo cp $DIR/resolv.conf /etc/resolv.conf
+    fi
+}
+
+KILL_OPENVPN(){
+    sudo pkill openvpn
+
+    echo restaurando dns
+    sudo cp $DIR/resolv.conf /etc/resolv.conf
+}
+
+if [[ $( pgrep openvpn ) ]]; then
+    KILL_OPENVPN
+else
+    RUN_OPENVPN
+fi
+
