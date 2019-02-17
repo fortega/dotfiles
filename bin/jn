@@ -1,10 +1,15 @@
 #!/bin/sh
+# Notebooks dir
+N=$HOME/jupyter-notebooks
+# Jupyter path
 P=$HOME/.local/bin
 
-if [ -f $P/jupyter ]
-then
-    cd $P
-    ./jupyter notebook --ip 127.0.0.1
+if [ -f $P/jupyter ]; then
+    if [ -d $N ]; then
+	cd $N
+    fi
+    
+    $P/jupyter notebook --ip 127.0.0.1
 else
     echo "$P/jupyter not found"
 fi
