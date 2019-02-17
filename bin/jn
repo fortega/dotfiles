@@ -1,0 +1,12 @@
+#!/bin/sh
+P=$HOME/.local/bin
+
+if [ -f $P/jupyter ]
+then
+    cd $P
+    ./jupyter notebook --ip 172.0.0.1
+else
+    echo "$P/jupyter not found"
+fi
+
+    
