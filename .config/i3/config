@@ -121,7 +121,7 @@ bindsym $mod+r mode "resize"
 #volumen Fedora
 bindsym XF86AudioRaiseVolume exec amixer sset Master 1%+
 bindsym XF86AudioLowerVolume exec amixer sset Master 1%-
-bindsym XF86AudioMute exec amixer toggle Master mute
+bindsym XF86AudioMute exec amixer set Master toggle
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
