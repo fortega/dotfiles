@@ -19,24 +19,23 @@ order += "cpu_usage"
 order += "tztime local"
 
 volume master {
-       format = "%volume"
        device = "default"
        mixer = "Master"
 }
 
 cpu_usage {
-	format = %usage
+	format = "%usage"
 }
 
 wireless _first_ {
         format_up = "W: (%quality at %essid) %ip"
-        format_down = "W: down"
+        format_down = "W"
 }
 
 ethernet _first_ {
         # if you use %speed, i3status requires root privileges
         format_up = "E: %ip (%speed)"
-        format_down = "E: down"
+        format_down = "E"
 }
 
 battery all {
@@ -47,5 +46,3 @@ battery all {
 tztime local {
         format = "%Y-%m-%d %H:%M"
 }
-
-
