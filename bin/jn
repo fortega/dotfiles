@@ -3,6 +3,10 @@
 N=$HOME/jupyter-notebooks
 # Jupyter path
 P=$HOME/.local/bin
+# Spark Home
+if [ -d "$HOME/spark" ]; then
+    export SPARK_HOME=$HOME/spark
+fi
 
 if [ -f $P/jupyter ]; then
     if [ -d $N ]; then
