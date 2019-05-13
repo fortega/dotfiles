@@ -3,9 +3,13 @@
 N=$HOME/jupyter-notebooks
 # Jupyter path
 P=$HOME/.local/bin
+
+IP="127.0.0.1"
+
 # Spark Home
 if [ -d "$HOME/spark" ]; then
     export SPARK_HOME=$HOME/spark
+    export SPARK_LOCAL_IP=$IP
 fi
 
 if [ -f $P/jupyter ]; then
@@ -13,7 +17,7 @@ if [ -f $P/jupyter ]; then
 	cd $N
     fi
     
-    $P/jupyter notebook --ip 127.0.0.1
+    $P/jupyter notebook --ip $IP
 else
     echo "$P/jupyter not found"
 fi
