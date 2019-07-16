@@ -13,4 +13,4 @@ else
     echo "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh not found"
 fi
 
-alias ssh=ssh -4
+alias ssh="ssh-add -l; [[ \$? -eq 1 ]] && ssh-add; ssh -4"
