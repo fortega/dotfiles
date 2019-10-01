@@ -1,2 +1,4 @@
 #!/bin/sh
+/usr/bin/pkill firefox
+/usr/bin/sleep 1
 /usr/sbin/poweroff
