@@ -21,3 +21,4 @@ do
 	ln -s $(pwd)/$i $HOME/$(basename $i)
     fi
 done
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar false

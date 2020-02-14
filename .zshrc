@@ -17,3 +17,4 @@ then
 fi
 
 alias ssh="ssh-add -l; [[ \$? -eq 1 ]] && ssh-add; ssh -4"
+alias k="kubectl"
