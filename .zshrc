@@ -16,5 +16,7 @@ then
     alias docker="podman"
 fi
 
+export TZ="America/Santiago"
+
 alias ssh="ssh-add -l; [[ \$? -eq 1 ]] && ssh-add; ssh -4"
 alias k="kubectl"
