@@ -1,16 +1,15 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_SYNTAX=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-if [[ -d $ZSH ]]
+if [[ ! -d $ZSH ]]
 then
-    ZSH_THEME="agnoster"
-    plugins=( git fedora dnf aws gcloud mvn )
-    source $ZSH/oh-my-zsh.sh
-else
-    echo oh-my-zsh not found. run:
-    echo git clone https://github.com/ohmyzsh/ohmyzsh.git $ZSH
+    echo oh-my-zsh not found.
+    git clone https://github.com/ohmyzsh/ohmyzsh.git $ZSH
 fi
 
+ZSH_THEME="agnoster"
+plugins=( git dnf aws gcloud mvn sbt otp )
+source $ZSH/oh-my-zsh.sh
 
 if [ -f $ZSH_SYNTAX ]
 then
@@ -30,3 +29,5 @@ export PATH=$PATH:/usr/local/bin:$HOME/.local/bin
 alias ssh="ssh-add -l; [[ \$? -eq 1 ]] && ssh-add; ssh -4"
 alias k="kubectl"
 alias sudok="sudo kubectl"
+
+#export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
