@@ -1,0 +1,2 @@
+#!/bin/bash
+xrandr --output $(xrandr | grep " connected " | tail -n1 | cut -d" " -f1) --off
