@@ -23,12 +23,14 @@ then
     then
 	    set_v $1
     else
+        echo "Value must be between $MIN and $MAX. Got: $1"
 	    show
     fi
 else
     b=$( < $BASE/actual_brightness)
     if [ $b -lt $MIN ]
     then
+        echo "Lower than $MIN. Fixing."
 	    set_v $MIN
     else
 	    show
