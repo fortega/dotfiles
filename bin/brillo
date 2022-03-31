@@ -31,11 +31,9 @@ run() {
             set_v $1
         else
             echo "Value must be between $MIN and $MAX. Got: $1"
-            fix_show
         fi
-    else
-        fix_show
     fi
+    fix_show
 }
 
 run $@
