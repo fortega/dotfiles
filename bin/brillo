@@ -1,30 +1,37 @@
 #!/usr/bin/zsh
+
+MIN=5
+
+BASE="/sys/class/backlight/"
+BASE="$BASE/$(ls $BASE | head -n1)"
+
+MAX=$(< $BASE/max_brightness)
+
 set_v(){
-    echo Guardando:
-    echo $1 | sudo tee /sys/class/backlight/intel_backlight/brightness
+    echo "Saving: $1"
+    echo $1 | sudo tee $BASE/brightness > /dev/null
+    echo "Saved."
 }
 
 show(){
-    echo Actual:
-    < /sys/class/backlight/intel_backlight/actual_brightness
+    echo Actual: $(< $BASE/actual_brightness)
 }
 
 if [ $# -gt 0 ]
 then
-    if [ $1 -gt 0 ]
+    if [ $1 -ge $MIN ] && [ $1 -le $MAX ]
     then
-	set_v $1
+	    set_v $1
     else
-	show
+	    show
     fi
 else
-    min=4500
-    b=$( < /sys/class/backlight/intel_backlight/actual_brightness)
-    if [ $b -lt $min ]
+    b=$( < $BASE/actual_brightness)
+    if [ $b -lt $MIN ]
     then
-	set_v $min
+	    set_v $MIN
     else
-	show
+	    show
     fi
 fi
 
