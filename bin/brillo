@@ -4,37 +4,38 @@ MIN=5
 
 BASE="/sys/class/backlight/"
 BASE="$BASE/$(ls $BASE | head -n1)"
-
+ACTUAL=$( < $BASE/actual_brightness)
 MAX=$(< $BASE/max_brightness)
 
 set_v(){
     echo "Saving: $1"
     echo $1 | sudo tee $BASE/brightness > /dev/null
+    ACTUAL=$1
     echo "Saved."
 }
 
-show(){
-    echo Actual: $(< $BASE/actual_brightness)
+fix_show(){
+    if [ $ACTUAL -lt $MIN ]
+    then
+        echo "Actual ($ACTUAL) lower than min($MIN). Fixing."
+        set_v $MIN
+    fi
+    echo "Actual: $ACTUAL | Min: $MIN | Max: $MAX"
 }
 
-if [ $# -gt 0 ]
-then
-    if [ $1 -ge $MIN ] && [ $1 -le $MAX ]
+run() {
+    if [ $# -gt 0 ]
     then
-	    set_v $1
+        if [ $1 -ge $MIN ] && [ $1 -le $MAX ]
+        then
+            set_v $1
+        else
+            echo "Value must be between $MIN and $MAX. Got: $1"
+            fix_show
+        fi
     else
-        echo "Value must be between $MIN and $MAX. Got: $1"
-	    show
+        fix_show
     fi
-else
-    b=$( < $BASE/actual_brightness)
-    if [ $b -lt $MIN ]
-    then
-        echo "Lower than $MIN. Fixing."
-	    set_v $MIN
-    else
-	    show
-    fi
-fi
+}
 
-
+run $@
